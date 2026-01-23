@@ -9,9 +9,10 @@ if data.raw["electric-pole"]["or_pole"] then
 	data.raw["electric-pole"]["or_pole"].supply_area_distance = 7.5 --old was 4.5
 end
 
-if data.raw["storage-tank"]["or_tank"] then
-	data.raw["storage-tank"]["or_tank"].fluid_box.volume = 150000 --overrides default settings
-end
+--if data.raw["storage-tank"]["or_tank"] then
+--data.raw["storage-tank"]["or_tank"].fluid_box.volume = 150000 --overrides default settings
+--data.raw["storage-tank"]["or_tank"].fluid_box.volume = 300000 --overrides default settings
+--end
 if data.raw["generator"]["or_power_electric"] then
 	local gen = data.raw["generator"]["or_power_electric"]
 	gen.fluid_box.filter = nil
@@ -25,7 +26,7 @@ if data.raw["mining-drill"]["oil_rig"] then
 end
 
 if data.raw["cargo-wagon"]["cargo_ship"] then
-	data.raw["cargo-wagon"]["cargo_ship"].inventory_size = 300
+	data.raw["cargo-wagon"]["cargo_ship"].inventory_size = 500
 end
 
 if data.raw["car"]["indep-boat"] then

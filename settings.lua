@@ -15,7 +15,7 @@ data.raw["double-setting"]["fuel_modifier"].hidden = true
 
 force_setting("bool", "floating_pole_fulgora", true)
 force_setting("bool", "floating_pole_aquilo", true)
-force_setting("int", "oil_rig_capacity", 150)
-force_setting("int", "tanker_capacity", 150)
+force_setting("int", "oil_rig_capacity", 500)
+force_setting("int", "tanker_capacity", 250)
 force_setting("string", "oil_rigs_require_external_power", "only-when-moduled")
 force_setting("bool", "offshore_oil_enabled", true)
