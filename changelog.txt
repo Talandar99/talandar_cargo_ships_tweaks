@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2026-02-01
+  Changes:
+    - added tweaks to Distant Shores mod if it's installed
+    - Distant Shores galleon can now be placed on waterways
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2026-01-03
   Changes:

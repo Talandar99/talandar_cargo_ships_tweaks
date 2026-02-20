@@ -39,3 +39,16 @@ if data.raw["car"]["indep-boat"] then
 	data.raw["car"]["indep-boat"].braking_power = "0.75MW"
 	--indep_boat.friction = 0.002/speed_modifier -- default speed_modifier is 1
 end
+
+if mods["pirateship"] then
+	-- remove buggy input from pirate ship mod
+	data:extend({
+		{
+			type = "custom-input",
+			name = "enter-pirate-ship",
+			key_sequence = "",
+			consuming = "none",
+		},
+	})
+	require("pirate-ship")
+end
