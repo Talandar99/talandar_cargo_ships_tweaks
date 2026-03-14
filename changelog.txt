@@ -1,5 +1,16 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
+Date: 2026-03-14
+  Changes:
+    - added oil rig recipe and research changes
+    - added port recipe and research changes 
+    - port is now always unlocked with steel axe research
+    - if Distant Shores is installed, galleon is always unlocked with steel axe research
+  Bugfixes:
+    - galleon placed on waterway don't have car backlights
+    - galleon placed on waterway now sound like galleon not like locomotive/car XD
+---------------------------------------------------------------------------------------------------
+Version: 0.3.0
 Date: 2026-02-01
   Changes:
     - added tweaks to Distant Shores mod if it's installed

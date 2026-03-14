@@ -21,9 +21,6 @@ if data.raw["generator"]["or_power_electric"] then
 	gen.fluid_box.volume = 500
 	gen.effectivity = 5000
 end
-if data.raw["mining-drill"]["oil_rig"] then
-	data.raw["mining-drill"]["oil_rig"].energy_usage = "120kW" -- was 750
-end
 
 if data.raw["cargo-wagon"]["cargo_ship"] then
 	data.raw["cargo-wagon"]["cargo_ship"].inventory_size = 500
@@ -51,4 +48,57 @@ if mods["pirateship"] then
 		},
 	})
 	require("pirate-ship")
+	data.raw["recipe"]["pirateship"].ingredients = {
+		{ type = "item", name = "wood", amount = 100 },
+		{ type = "item", name = "iron-plate", amount = 10 },
+	}
+	data.raw["recipe"]["pirateship"].energy_required = 10
+	local t = data.raw["technology"]["Pirate_Ship"]
+
+	t.icon = "__talandar_cargo_ships_tweaks__/graphics/pirateship/pirateship_tech_icon.png"
+	t.icon_size = 256
+	t.effects = {
+		{ type = "unlock-recipe", recipe = "pirateship-cannonball" },
+	}
 end
+
+-------------------------------------------------------------------------------
+-- oil rig
+-------------------------------------------------------------------------------
+if data.raw["mining-drill"]["oil_rig"] then
+	data.raw["mining-drill"]["oil_rig"].energy_usage = "120kW" -- was 750
+end
+local t = data.raw["technology"]["deep_sea_oil_extraction"]
+t.prerequisites = {
+	"oil-gathering",
+	"concrete",
+}
+
+t.unit = {
+	count = 300,
+	ingredients = {
+		{ "automation-science-pack", 1 },
+		{ "logistic-science-pack", 1 },
+	},
+	time = 30,
+}
+if data.raw["recipe"]["oil_rig"] then
+	data.raw["recipe"]["oil_rig"].ingredients = {
+		{ type = "item", name = "steel-plate", amount = 200 },
+		{ type = "item", name = "iron-gear-wheel", amount = 50 },
+		{ type = "item", name = "pipe", amount = 100 },
+		{ type = "item", name = "steam-engine", amount = 3 },
+		{ type = "item", name = "storage-tank", amount = 6 },
+		{ type = "item", name = "concrete", amount = 100 },
+	}
+end
+-------------------------------------------------------------------------------
+-- port
+-------------------------------------------------------------------------------
+if data.raw["recipe"]["port"] then
+	data.raw["recipe"]["port"].ingredients = {
+		{ type = "item", name = "steel-plate", amount = 5 },
+		{ type = "item", name = "iron-plate", amount = 20 },
+	}
+end
+-------------------------------------------------------------------------------

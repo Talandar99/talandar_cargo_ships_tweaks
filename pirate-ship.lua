@@ -138,6 +138,7 @@ boat.working_sound = nil
 boat.drive_over_tie_trigger = nil
 boat.factoriopedia_simulation = nil
 boat.corpse = nil
+boat.back_light = nil
 
 ----------------------------------------------------------------
 ------------------------ BOAT ENGINE ---------------------------
@@ -169,7 +170,25 @@ boat_engine.energy_source = {
 boat_engine.pictures = nil
 boat_engine.water_reflection = nil
 boat_engine.wheels = nil
---boat_engine.working_sound = car_sounds
+boat_engine.working_sound = {
+	sound = {
+		filename = "__pirateship__/Sound/ship-sailing.ogg",
+		volume = 0.7,
+		min_speed = 0.6,
+		max_speed = 0.9,
+	},
+	activate_sound = {
+		filename = "__pirateship__/Sound/ship-start.ogg",
+		volume = 1,
+		speed = 0.6,
+	},
+	deactivate_sound = {
+		filename = "__pirateship__/Sound/ship-start.ogg",
+		volume = 1,
+		speed = 0.6,
+	},
+	match_speed_to_activity = true,
+}
 boat_engine.front_light = nil
 boat_engine.front_light_pictures = nil
 boat_engine.back_light = nil
