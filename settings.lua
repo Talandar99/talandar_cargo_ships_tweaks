@@ -1,3 +1,12 @@
+data:extend({
+	{
+		type = "bool-setting",
+		name = "tldr-cargo-ships-old-train-bridge",
+		setting_type = "startup",
+		default_value = true,
+		order = "talandar-cargo-ships-tweaks-a",
+	},
+})
 -- ignore cargo ships powerpole settings to save some collision layers
 local function force_setting(setting_type, setting_name, value)
 	local setting = data.raw[setting_type .. "-setting"][setting_name]
