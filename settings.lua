@@ -1,7 +1,7 @@
 data:extend({
 	{
 		type = "bool-setting",
-		name = "tldr-cargo-ships-old-train-bridge",
+		name = "tldr-disable-old-train-bridge",
 		setting_type = "startup",
 		default_value = true,
 		order = "talandar-cargo-ships-tweaks-a",

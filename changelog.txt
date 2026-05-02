@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.7.0
+Date: 2026-04-12
+  Bugfixes:
+    - Space Exploration: added fix for fish coliding with boats in "car" mode. It is caused by
+      Space Exploration accidently removing "colliding_with_tiles_only = true" while applying it's 
+      own masks
+    - setting to disable train bridge should now work properly
+---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 2026-04-12
   Changes:
