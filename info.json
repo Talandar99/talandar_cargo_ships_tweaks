@@ -1,12 +1,14 @@
 {
     "name": "talandar_cargo_ships_tweaks",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "title": "Talandar Cargo Ships Tweaks",
     "author": "Talandar",
     "dependencies": [
         "base >= 2.0",
         "cargo-ships",
-        "? pirateship"
+        "? pirateship",
+        "! TS_Diesel_Cargo_Ships_Fork",
+        "! TS_Pelagos_CF"
     ],
     "description": "Tweaks and changes to cargo ships mod that I share between my mods",
     "factorio_version": "2.0"

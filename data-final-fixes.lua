@@ -5,7 +5,7 @@ if mods["space-exploration"] then
 end
 
 -- hide bridge and all related things
-if settings.startup["tldr-disable-old-train-bridge"] then
+if settings.startup["tldr-disable-old-train-bridge"].value then
 	-- items
 	if data.raw["item"]["bridge_base"] then
 		data.raw["item"]["bridge_base"].hidden = true
