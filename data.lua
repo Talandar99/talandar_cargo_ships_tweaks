@@ -32,8 +32,8 @@ if data.raw["car"]["indep-boat"] then
 	data.raw["car"]["indep-boat"].equipment_grid = "medium-equipment-grid"
 	data.raw["car"]["indep-boat"].trash_inventory_size = 10
 	data.raw["car"]["indep-boat"].chunk_exploration_radius = 3
-	data.raw["car"]["indep-boat"].friction = 0.001
-	data.raw["car"]["indep-boat"].braking_power = "0.75MW"
+	data.raw["car"]["indep-boat"].friction_force = 0.001
+	data.raw["car"]["indep-boat"].braking_force = 12500 -- 2.0: braking_power = "0.75MW", i.e. 750 kW / 60 ticks
 	--indep_boat.friction = 0.002/speed_modifier -- default speed_modifier is 1
 end
 
@@ -48,6 +48,31 @@ if mods["pirateship"] then
 		},
 	})
 	require("pirate-ship")
+	-- cargo-ships 2.1 reads ship definitions from mod-data (prototypes/ship-definitions.lua) instead of the
+	-- "cargo-ships" remote interface. It reads them in name order, and a boat definition needs its ship
+	-- definition first, hence the -1/-2 suffixes
+	data:extend({
+		{
+			type = "mod-data",
+			name = "talandar-pirateship-1-ship",
+			data_type = "cargo-ships.ship-definition",
+			data = {
+				name = "pirateship_rail",
+				engine = "pirateship_engine",
+				engine_scale = 0.6,
+				engine_at_front = true,
+			},
+		},
+		{
+			type = "mod-data",
+			name = "talandar-pirateship-2-boat",
+			data_type = "cargo-ships.boat-definition",
+			data = {
+				name = "pirateship",
+				rail_version = "pirateship_rail",
+			},
+		},
+	})
 	data.raw["recipe"]["pirateship"].ingredients = {
 		{ type = "item", name = "wood", amount = 100 },
 		{ type = "item", name = "iron-plate", amount = 10 },
@@ -65,24 +90,29 @@ end
 -------------------------------------------------------------------------------
 -- oil rig
 -------------------------------------------------------------------------------
-data.raw["item"]["oil_rig"].weight = 1000 * kg
+-- since 2.1 the oil rig is in cargo-ships-oil-rig, which may not be installed
+if data.raw["item"]["oil_rig"] then
+	data.raw["item"]["oil_rig"].weight = 1000 * kg
+end
 if data.raw["mining-drill"]["oil_rig"] then
 	data.raw["mining-drill"]["oil_rig"].energy_usage = "120kW" -- was 750
 end
 local t = data.raw["technology"]["deep_sea_oil_extraction"]
-t.prerequisites = {
-	"oil-gathering",
-	"concrete",
-}
+if t then
+	t.prerequisites = {
+		"oil-gathering",
+		"concrete",
+	}
 
-t.unit = {
-	count = 300,
-	ingredients = {
-		{ "automation-science-pack", 1 },
-		{ "logistic-science-pack", 1 },
-	},
-	time = 30,
-}
+	t.unit = {
+		count = 300,
+		ingredients = {
+			{ "automation-science-pack", 1 },
+			{ "logistic-science-pack", 1 },
+		},
+		time = 30,
+	}
+end
 if data.raw["recipe"]["oil_rig"] then
 	data.raw["recipe"]["oil_rig"].ingredients = {
 		{ type = "item", name = "steel-plate", amount = 200 },
