@@ -9,7 +9,8 @@ data:extend({
 })
 -- ignore cargo ships powerpole settings to save some collision layers
 local function force_setting(setting_type, setting_name, value)
-	local setting = data.raw[setting_type .. "-setting"][setting_name]
+	local settings = data.raw[setting_type .. "-setting"]
+	local setting = settings and settings[setting_name]
 	if setting then
 		if setting_type == "bool" then
 			setting.forced_value = value

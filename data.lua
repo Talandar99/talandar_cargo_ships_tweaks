@@ -32,8 +32,8 @@ if data.raw["car"]["indep-boat"] then
 	data.raw["car"]["indep-boat"].equipment_grid = "medium-equipment-grid"
 	data.raw["car"]["indep-boat"].trash_inventory_size = 10
 	data.raw["car"]["indep-boat"].chunk_exploration_radius = 3
-	data.raw["car"]["indep-boat"].friction = 0.001
-	data.raw["car"]["indep-boat"].braking_power = "0.75MW"
+	data.raw["car"]["indep-boat"].friction_force = 0.001
+	data.raw["car"]["indep-boat"].braking_force = (750 * 1000) / 60 -- was braking_power = "0.75MW"
 	--indep_boat.friction = 0.002/speed_modifier -- default speed_modifier is 1
 end
 
@@ -48,6 +48,29 @@ if mods["pirateship"] then
 		},
 	})
 	require("pirate-ship")
+	-- register the pirate ship with Cargo Ships (2.1 replaced the add_ship/add_boat remote API with mod-data)
+	data:extend({
+		{
+			type = "mod-data",
+			name = "pirateship_rail",
+			data_type = "cargo-ships.ship-definition",
+			data = {
+				name = "pirateship_rail",
+				engine = "pirateship_engine",
+				engine_scale = 0.6,
+				engine_at_front = true,
+			},
+		},
+		{
+			type = "mod-data",
+			name = "pirateship",
+			data_type = "cargo-ships.boat-definition",
+			data = {
+				name = "pirateship",
+				rail_version = "pirateship_rail",
+			},
+		},
+	})
 	data.raw["recipe"]["pirateship"].ingredients = {
 		{ type = "item", name = "wood", amount = 100 },
 		{ type = "item", name = "iron-plate", amount = 10 },
@@ -65,33 +88,36 @@ end
 -------------------------------------------------------------------------------
 -- oil rig
 -------------------------------------------------------------------------------
-data.raw["item"]["oil_rig"].weight = 1000 * kg
-if data.raw["mining-drill"]["oil_rig"] then
-	data.raw["mining-drill"]["oil_rig"].energy_usage = "120kW" -- was 750
-end
-local t = data.raw["technology"]["deep_sea_oil_extraction"]
-t.prerequisites = {
-	"oil-gathering",
-	"concrete",
-}
-
-t.unit = {
-	count = 300,
-	ingredients = {
-		{ "automation-science-pack", 1 },
-		{ "logistic-science-pack", 1 },
-	},
-	time = 30,
-}
-if data.raw["recipe"]["oil_rig"] then
-	data.raw["recipe"]["oil_rig"].ingredients = {
-		{ type = "item", name = "steel-plate", amount = 200 },
-		{ type = "item", name = "iron-gear-wheel", amount = 50 },
-		{ type = "item", name = "pipe", amount = 100 },
-		{ type = "item", name = "steam-engine", amount = 3 },
-		{ type = "item", name = "storage-tank", amount = 6 },
-		{ type = "item", name = "concrete", amount = 100 },
+-- oil rig lives in the optional cargo-ships-oil-rig mod since Cargo Ships 2.1
+if data.raw["item"]["oil_rig"] then
+	data.raw["item"]["oil_rig"].weight = 1000 * kg
+	if data.raw["mining-drill"]["oil_rig"] then
+		data.raw["mining-drill"]["oil_rig"].energy_usage = "120kW" -- was 750
+	end
+	local t = data.raw["technology"]["deep_sea_oil_extraction"]
+	t.prerequisites = {
+		"oil-gathering",
+		"concrete",
 	}
+
+	t.unit = {
+		count = 300,
+		ingredients = {
+			{ "automation-science-pack", 1 },
+			{ "logistic-science-pack", 1 },
+		},
+		time = 30,
+	}
+	if data.raw["recipe"]["oil_rig"] then
+		data.raw["recipe"]["oil_rig"].ingredients = {
+			{ type = "item", name = "steel-plate", amount = 200 },
+			{ type = "item", name = "iron-gear-wheel", amount = 50 },
+			{ type = "item", name = "pipe", amount = 100 },
+			{ type = "item", name = "steam-engine", amount = 3 },
+			{ type = "item", name = "storage-tank", amount = 6 },
+			{ type = "item", name = "concrete", amount = 100 },
+		}
+	end
 end
 -------------------------------------------------------------------------------
 -- port
